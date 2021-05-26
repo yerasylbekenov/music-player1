@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="#">Kidle</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto mr-auto">
+      <a class="nav-item nav-link active" href="#">Playlist <span class="sr-only">(current)</span></a>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+      <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" (click)="addClick()">
+        Upload Music
+      </button>
+
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeClick()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <app-upload [music]="music" *ngIf="ActiveUploadMusicComp"></app-upload>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</nav>
+
+<!-- <div class="firstsec">
+  <img src="album.jpg" alt="album-cover" height="10%" width="39%">
+  <div class="songs">
+    <ul class="playlist">
+      <li *ngFor="let dataItem of Playlist" (click)="openFile(dataItem.Url)">{{dataItem.ArtistName}} - {{dataItem.SongName}}</li>
+    </ul>
+  </div>
+</div> -->
+
+<div class="manipulation">
+  <div class="manip">
+    <button type="button" class="btn btn-outline-light" (click)="play()"><i class="fas fa-play"></i></button>
+    <button type="button" class="btn btn-outline-light" (click)="pause()"><i class="fas fa-pause"></i></button>
+    <button type="button" class="btn btn-outline-light" (click)="stop()"><i class="fas fa-stop"></i></button>
+    <span style="padding-left: 3%; padding-bottom: 3%; color: white">{{currentTime}}</span>
+    <input class="time" type="range" min="0" max="{{duration}}" [value]="seek" (input)="setSeekTo($event)">
+    <span style="padding-bottom: 3%; color: white">{{duration}}</span>
+    <span style="padding-left: 3%; padding-bottom: 3%; color: white">Volume</span>
+    <input class="vol" ng-model="value" type="range" min="0" max="1" step="0.01" value="0.5" (input)="setVolume($event)">
+  </div>
+</div>
+
+  <div class="playlist d-flex flex-column bd-highlight mb-3">
+    <div class="songdiv p-2" *ngFor="let dataItem of Playlist">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-md-6" (click)="openFile(dataItem.Url)">
+            {{dataItem.ArtistName}} - {{dataItem.SongName}}
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-outline-dark edit" data-toggle="modal" data-target="#exampleModal" (click)="editClick(dataItem)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button type="button" class="btn btn-outline-dark" (click)="deleteClick(dataItem)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<router-outlet></router-outlet>
